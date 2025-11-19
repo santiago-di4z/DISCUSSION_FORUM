@@ -28,7 +28,10 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # User definition
-AUTH_USER_MODEL = 'users.USER'
+AUTH_USER_MODEL = 'users.User'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
 
 # Application definition
 INSTALLED_APPS = [

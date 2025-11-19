@@ -1,10 +1,10 @@
 from django.db import models
 from django.conf import settings
 
-USER = settings.AUTH_USER_MODEL
+User = settings.AUTH_USER_MODEL
 
 # - - - - - - BOARD  - - - - - - #
-class BOARD(models.Model):
+class Board(models.Model):
     id = models.PositiveSmallIntegerField(primary_key=True)
     name = models.CharField(max_length=100, unique=True)
     short_name = models.CharField(max_length=10, unique=True)
@@ -14,10 +14,10 @@ class BOARD(models.Model):
         return f"{self.name} ({self.short_name}) - {self.id}"
 
 # - - - - - - THREAD  - - - - - - #
-class THREAD(models.Model):
+class Thread(models.Model):
     id = models.PositiveIntegerField(primary_key=True)
-    board = models.ForeignKey(BOARD, on_delete=models.CASCADE, related_name="threads")
-    user = models.ForeignKey(USER, on_delete=models.CASCADE, related_name="threads")
+    board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name="threads")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="threads")
     title = models.CharField(max_length=225)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -31,10 +31,10 @@ class THREAD(models.Model):
         ordering = ['-created_at'] # Default: newest first
 
 # - - - - - - COMMENT  - - - - - - #
-class COMMENT(models.Model):
+class Comment(models.Model):
     id = models.AutoField(primary_key=True)
-    thread = models.ForeignKey(THREAD, on_delete=models.CASCADE, related_name="comments")
-    user = models.ForeignKey(USER, on_delete=models.CASCADE, related_name="comments")
+    thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name="comments")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 

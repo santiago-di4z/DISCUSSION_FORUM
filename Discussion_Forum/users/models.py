@@ -1,8 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-class USER(AbstractUser):
-    # empty by now
+class User(AbstractUser):
+    # Currently empty
 
     def __str__(self):
         return self.username

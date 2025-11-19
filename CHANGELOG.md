@@ -17,3 +17,5 @@ All notable changes to this project will be documented in this file
 ### Improved
 - Basic validation logic for authentication forms.
 - General project structure by organizing views, forms, and auth flows.
+### Tested
+- Manual testing for registration, login, and logout to verify correct behavior and error handling.

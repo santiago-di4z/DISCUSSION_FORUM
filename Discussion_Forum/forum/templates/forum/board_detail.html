@@ -1,0 +1,20 @@
+<h1>{{ board.name }}</h1>
+<p>{{ board.description }}</p>
+
+<a href="{% url 'create_thread' board.short_name %}">Create a new thread</a>
+
+<h2>New Threads</h2>
+{% for t in new_threads %}
+    <p><a href="{% url 'thread_detail' t.id %}">{{ t.title }}</a></p>
+{% empty %}
+    <p>There are no new threads.</p>
+{% endfor %}
+
+<h2>Popular Threads</h2>
+{% for t in popular_threads %}
+    <p><a href="{% url 'thread_detail' t.id %}">
+        {{ t.title }} ({{ t.activity }})
+    </a></p>
+{% empty %}
+    <p>There are no popular threads.</p>
+{% endfor %}

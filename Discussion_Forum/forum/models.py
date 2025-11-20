@@ -5,7 +5,7 @@ User = settings.AUTH_USER_MODEL
 
 # - - - - - - BOARD  - - - - - - #
 class Board(models.Model):
-    id = models.PositiveSmallIntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100, unique=True)
     short_name = models.CharField(max_length=10, unique=True)
     description = models.TextField()
@@ -15,7 +15,7 @@ class Board(models.Model):
 
 # - - - - - - THREAD  - - - - - - #
 class Thread(models.Model):
-    id = models.PositiveIntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name="threads")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="threads")
     title = models.CharField(max_length=225)

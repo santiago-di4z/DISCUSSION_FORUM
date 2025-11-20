@@ -1,1 +1,20 @@
-<h1>Home</h1>
+{% extends 'forum/base.html' %}
+
+{% block content %}
+<h1>Boards</h1>
+
+{% for item in data %}
+    <h2><a href="{% url 'board_detail' item.board.short_name %}">{{ item.board.name }}</a></h2>
+    <p>{{ item.board.description }}</p>
+
+    {% if item.popular %}
+        <p><strong>Thread más popular:</strong> 
+            <a href="{% url 'thread_detail' item.popular.id %}">
+                {{ item.popular.title }} ({{ item.popular.activity }} comments)
+            </a>
+        </p>
+    {% else %}
+        <p>No threads found</p>
+    {% endif %}
+{% endfor %}
+{% endblock %}

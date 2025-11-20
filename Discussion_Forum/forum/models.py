@@ -37,6 +37,15 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    
+    # To reply to antoher comment
+    reply_to = models.ForeignKey(
+        "self",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name="replies"
+    )
 
     def __str__(self):
         return f"Comment ({self.id}) by {self.user} on Thread {self.thread.id}"

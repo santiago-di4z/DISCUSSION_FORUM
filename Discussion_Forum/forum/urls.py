@@ -7,4 +7,5 @@ urlpatterns = [
     path('board/<str:short_name>/new-thread/', views.create_thread, name='create_thread'),
     path('thread/<int:thread_id>/', views.thread_detail, name='thread_detail'),
     path('thread/<int:thread_id>/comment/', views.create_comment, name='create_comment'),
+    path('comment/<int:comment_id>/reply/', views.reply_comment, name='reply_comment')
 ]

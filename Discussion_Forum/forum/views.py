@@ -56,7 +56,7 @@ def create_thread(request, short_name):
 
     return render(request, 'forum/create_thread.html', {"board": board, "form": form})
 
-# Thread + Create New Comment View
+# Thread View
 def thread_detail(request, thread_id):
     thread = get_object_or_404(Thread, id=thread_id)
     comments = Comment.objects.filter(thread=thread).order_by('created_at')
@@ -69,6 +69,8 @@ def thread_detail(request, thread_id):
         "form": form,
     })
 
+
+# Create New Comment View + Reply a Comment
 @login_required
 def create_comment(request, thread_id):
     thread = get_object_or_404(Thread, id=thread_id)
@@ -86,6 +88,24 @@ def create_comment(request, thread_id):
 
             thread.activity += 1
             thread.save(update_fields=['activity', 'updated_at'])
+        
+    return redirect('thread_detail', thread_id=thread.id)
 
-            return redirect('thread_detail', thread_id=thread.id)
+@login_required
+def reply_comment(request, comment_id):
+    parent_comment = get_object_or_404(Comment, id=comment_id)
+    thread = parent_comment.thread
+
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            reply = form.save(commit=False)
+            reply.thread = thread
+            reply.user = request.user
+            reply.reply_to = parent_comment
+            reply.save()
+
+            thread.activity += 1
+            thread.save(update_fields=['activity', 'updated_at'])
+        
     return redirect('thread_detail', thread_id=thread.id)

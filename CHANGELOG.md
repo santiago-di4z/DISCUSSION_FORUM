@@ -47,3 +47,13 @@ All notable changes to this project will be documented in this file
 - Updated tests from version 0.3:
     - 2 tests verify that registered users can create threads and comments.
     - 2 tests verify that unregistered users cannot create threads or comments.
+
+### Version 0.5 - Comment Reply System
+### Added
+- Support for replies: each comment can now have replies.
+- Display of comment ID next to the username for easier reference.
+- Display of the username being replied to, in case a comment is a reply.
+### Improved
+- Comment model updated to allow a parent comment field for replies.
+### Tests
+- Test added to verify that a reply is correctly linked as a child for its parent comment.

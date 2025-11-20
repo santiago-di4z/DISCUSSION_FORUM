@@ -48,7 +48,7 @@ All notable changes to this project will be documented in this file
     - 2 tests verify that registered users can create threads and comments.
     - 2 tests verify that unregistered users cannot create threads or comments.
 
-### Version 0.5 - Comment Reply System
+## Version 0.5 - Comment Reply System
 ### Added
 - Support for replies: each comment can now have replies.
 - Display of comment ID next to the username for easier reference.

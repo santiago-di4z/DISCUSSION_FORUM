@@ -18,7 +18,9 @@ All notable changes to this project will be documented in this file
 - Basic validation logic for authentication forms.
 - General project structure by organizing views, forms, and auth flows.
 ### Tests
-- Manual testing for registration, login, and logout to verify correct behavior and error handling.
+- Added test for registration
+- Added test for login
+- Added test for logout
 
 ## Version 0.3 - Boards, Threads & Comments
 ### Added
@@ -34,3 +36,14 @@ All notable changes to this project will be documented in this file
 - Added tests for thread creation flow.
 - Added tests for commenting functionality.
 - Added tests for board listing and activity-based popular thread ordering.
+
+## Version 0.4 - Thread & Comment Access Restrictions
+### Added
+- Restriction preventing unregistered users from creating threads.
+- Restriction preventing unregistered users from posting comments.
+### Improved
+- "HOME" button added to the header for easy navigation back to the main page.
+### Tests
+- Updated tests from version 0.3:
+    - 2 tests verify that registered users can create threads and comments.
+    - 2 tests verify that unregistered users cannot create threads or comments.

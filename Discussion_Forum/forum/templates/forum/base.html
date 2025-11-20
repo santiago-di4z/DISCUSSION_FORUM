@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Foro</title>
+</head>
+<body>
+
+    <nav style="background:#eee;padding:10px;">
+        {% if user.is_authenticated %}
+            <span>Bienvenido, {{ user.username }}!</span>
+            |
+            <a href="{% url 'logout' %}">Cerrar sesión</a>
+        {% else %}
+            <a href="{% url 'login' %}">Iniciar sesión</a>
+            |
+            <a href="{% url 'register' %}">Registrarme</a>
+        {% endif %}
+    </nav>
+
+    <hr>
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>

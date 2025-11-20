@@ -6,16 +6,16 @@ from forum.models import Board
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         boards = [
-            ("1", "Anime", "a", "Anime & manga board"),
-            ("2", "Random", "b", "Anything goes"),
-            ("3", "Gaming", "g", "Gaming board"),
-            ("4", "Technology", "t", "Technology board"),
-            ("5", "Music", "m", "Music discussions"),
+            ("Anime", "a", "Anime & manga board"),
+            ("Random", "b", "Anything goes"),
+            ("Gaming", "g", "Gaming board"),
+            ("Technology", "t", "Technology board"),
+            ("Music", "m", "Music discussions"),
         ]
 
-        for id, name, short, desc in boards:
+        for name, short, desc in boards:
             Board.objects.get_or_create(
-                id=id, name=name, short_name=short, description=desc
+                name=name, short_name=short, description=desc
             )
 
         self.stdout.write("Boards successfully loaded")

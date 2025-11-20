@@ -1,3 +1,6 @@
+{% extends 'forum/base.html' %}
+
+{% block content %}
 <h1>{{ thread.title }}</h1>
 <p>{{ thread.description }}</p>
 <p>Autor: {{ thread.user.username }}</p>
@@ -27,3 +30,4 @@
     {{ form.as_p }}
     <button type="submit">Comment</button>
 </form>
+{% endblock %}

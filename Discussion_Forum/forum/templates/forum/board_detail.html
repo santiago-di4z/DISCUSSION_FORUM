@@ -1,3 +1,6 @@
+{% extends 'forum/base.html' %}
+
+{% block content %}
 <h1>{{ board.name }}</h1>
 <p>{{ board.description }}</p>
 
@@ -18,3 +21,4 @@
 {% empty %}
     <p>There are no popular threads.</p>
 {% endfor %}
+{% endblock %}

@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Board, Thread, Comment
 from django.db.models import Max
 from .forms import ThreadForm, CommentForm
+from django.http import HttpResponse
 
 # Home View
 def home(request):
@@ -32,11 +33,16 @@ def board_detail(request, short_name):
 
 # Create New Thread View
 def create_thread(request, short_name):
-    board = get_object_or_404(Thread, short_name=short_name)
+    board = get_object_or_404(Board, short_name=short_name)
 
     if request.method == 'POST':
         form = ThreadForm(request.POST)
         if form.is_valid():
+
+            last_id = Thread.objects.aggregate(Max('id'))['id__max'] or 0
+            if last_id >= 999:
+                return HttpResponse("Max thread ID reached (999).")
+            
             thread = form.save(commit=False)
             thread.board = board
             thread.user = request.user

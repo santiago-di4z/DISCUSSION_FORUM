@@ -11,17 +11,31 @@
 <h2>Comments</h2>
 
 {% for c in comments %}
+
+    {% if c.reply_to %}
+        <p><em>Replying to {{ c.reply_to.user.username }} - #{{c.reply_to.thread.id}}{{ c.reply_to.id }}</em></p>
+    {% endif %}
+
     <p>
         <strong>{{ c.user.username }}</strong>
-        
+
         {% if c.user == thread.user %}
-            <span style="color:black;font-weight:bold;">(</span><span style="color:red;font-weight:bold;">OP</span><span style="color:black;font-weight:bold;">)</span>
+            (<span style="color:red;font-weight:bold;">OP</span>)
         {% endif %}
-        : {{ c.description }}
+        - #{{ c.id }}: {{ c.description }}
     </p>
-{% endfor %}
+
+    {% if user.is_authenticated %}
+        <form method="POST" action="{% url 'reply_comment' c.id %}">
+            {% csrf_token %}
+            <input type="text" name="description" placeholder="Reply..." required>
+            <button type="submit">Reply</button>
+        </form>
+    {% endif %}
 
 <hr>
+
+{% endfor %}
 
 <h3>Add comment</h3>
 
@@ -29,9 +43,12 @@
     <form method="POST" action="{% url 'create_comment' thread.id %}">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Comment</button>
+        <button type="submit">Add Comment</button>
     </form>
 {% else %}
-<p> You must <a href="{% url 'login' %}">log in</a> to comment.</p>
+    <p>You must <a href="{% url 'login' %}">log in</a> to comment.</p>
 {% endif %}
+
+<hr>
+
 {% endblock %}

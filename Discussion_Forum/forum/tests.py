@@ -136,5 +136,17 @@ class ForumTests(TestCase):
         # OP must appear in the HTML
         self.assertContains(response, "OP")
 
+    # Test --> Reply should appear as a child of a Comment
+    def test_rply_child(self):
+        reply = Comment.objects.create(
+            thread=self.thread,
+            user=self.user,
+            description="Reply text",
+            reply_to=self.parent_comment
+        )
+
+        self.assertEqual(self.parent_comment.replies.count(), 1)
+        self.assertEqual(self.parent_comment.replies.first(), reply)
+
 
 

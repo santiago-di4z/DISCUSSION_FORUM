@@ -4,7 +4,7 @@
 <h1>Boards</h1>
 
 {% for item in data %}
-    <h2><a href="{% url 'board_detail' item.board.short_name %}">{{ item.board.name }}</a></h2>
+    <h2><a href="{% url 'board_detail' item.board.short_name %}">{{ item.board.name }} - /{{ item.board.short_name }}/</a></h2>
     <p>{{ item.board.description }}</p>
 
     {% if item.popular %}

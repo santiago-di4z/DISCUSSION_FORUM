@@ -3,6 +3,7 @@ from .models import Board, Thread, Comment
 from django.db.models import Max
 from .forms import ThreadForm, CommentForm
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 # Home View
 def home(request):
@@ -32,6 +33,7 @@ def board_detail(request, short_name):
     })
 
 # Create New Thread View
+@login_required
 def create_thread(request, short_name):
     board = get_object_or_404(Board, short_name=short_name)
 
@@ -67,11 +69,12 @@ def thread_detail(request, thread_id):
         "form": form,
     })
 
+@login_required
 def create_comment(request, thread_id):
     thread = get_object_or_404(Thread, id=thread_id)
 
     form = CommentForm()
-    comments = Comment.objects.filter(thread=thread).order_by('created_at')
+    # comments = Comment.objects.filter(thread=thread).order_by('created_at')
 
     if request.method == 'POST':
         form = CommentForm(request.POST)
